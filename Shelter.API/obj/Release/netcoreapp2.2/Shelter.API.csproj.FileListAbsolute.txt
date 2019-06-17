@@ -1,0 +1,14 @@
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\bin\Release\netcoreapp2.2\Shelter.API.deps.json
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\bin\Release\netcoreapp2.2\Shelter.API.runtimeconfig.json
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\bin\Release\netcoreapp2.2\Shelter.API.runtimeconfig.dev.json
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\bin\Release\netcoreapp2.2\Shelter.API.dll
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\bin\Release\netcoreapp2.2\Shelter.API.pdb
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.RazorAssemblyInfo.cache
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.RazorAssemblyInfo.cs
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.AssemblyInfoInputs.cache
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.AssemblyInfo.cs
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.RazorTargetAssemblyInfo.cache
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.dll
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.pdb
+C:\Users\Piotr\source\repos\Shelter4.0\Shelter\Shelter.API\obj\Release\netcoreapp2.2\Shelter.API.csprojAssemblyReference.cache
