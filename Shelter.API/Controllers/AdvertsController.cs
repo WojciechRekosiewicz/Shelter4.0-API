@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Shelter.API.Contracts.Requests;
+using Shelter.API.Contracts.Responses;
 using Shelter.API.Data.Repositories;
 using Shelter.API.Entities;
 using Shelter.API.Extensions;
@@ -31,15 +34,27 @@ namespace Shelter.Controllers
         {
             var adverts = _advertRepository.GetAllAdverts();
 
-            return Ok(adverts);
+            if(!adverts.Any())
+            {
+                var errors = new List<string> { "There are no adverts in the database." };
+                return BadRequest(new AdvertFailedResponse { Errors = errors });
+            }
+
+            return Ok(new AdvertSuccessResponse { Result = adverts, Message = "Request proceed successfully" });
         }
 
         [HttpGet("my"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult MyAdverts()
         {
-            //var adverts = _advertRepository.GetAdvertsByUserId(_userManager.GetUserId(HttpContext.User));
+            var adverts = _advertRepository.GetAdvertsByUserId(HttpContext.GetUserId());
 
-            return Ok();
+            if(!adverts.Any())
+            {
+                var errors = new List<string> { "There are no adverts of the currect user in the database." };
+                return BadRequest(new AdvertFailedResponse { Errors = errors });
+            }
+
+            return Ok(new AdvertSuccessResponse { Result = adverts, Message = "Request proceed successfully" });
         }
 
         [HttpGet("{id}")]
@@ -55,40 +70,49 @@ namespace Shelter.Controllers
         }
 
         [HttpPost("create"), Authorize]
-        public async Task<IActionResult> CreateAsync([FromBody] Advert advert)
+        public async Task<IActionResult> CreateAsync([FromBody] AdvertCreateRequest advertRequest)
         {
             var currentUserId = HttpContext.GetUserId();
-
-            advert.AuthorId = currentUserId;
+            var advert = new Advert
+            {
+                Title = advertRequest.Title,
+                AuthorId = currentUserId,
+                ShortDescription = advertRequest.ShortDescription,
+                LongDescription = advertRequest.LongDescription,
+                ImageUrl = advertRequest.ImageUrl
+            };
+            
 
             await _advertRepository.CreateAsync(advert);
-
-            return Ok();
+            var response = new AdvertSuccessResponse { Message = "Successfully created new advert" };
+            return Ok(response);
         }
 
         [HttpPut("{id}"), Authorize]
-        public async Task<IActionResult> UpdateAsync([FromBody] Advert advert)
+        public async Task<IActionResult> UpdateAsync([FromBody] Advert advert )
         {
             var userOwnsAdvert = await _advertRepository.UserOwnsAdvertAsync(advert.AdvertId, HttpContext.GetUserId());
 
             if(!userOwnsAdvert)
             {
-                return BadRequest(new { error = "You do not own this advert." });
+                var response = new AdvertFailedResponse { Errors = new List<string> { "You do not own this advert." } };
+                return BadRequest(response);
             }
 
             try
             {
                 await _advertRepository.UpdateAsync(advert);
-
-                return Ok();
+                var response = new AdvertSuccessResponse { Message = "Successfully updated the advert." };
+                return Ok(response);
             }
             catch(ArgumentException ex)
             {
-                return BadRequest(ex.Message);
+                var response = new AdvertFailedResponse { Errors = new List<string> { ex.Message } };
+                return BadRequest(response);
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             try
