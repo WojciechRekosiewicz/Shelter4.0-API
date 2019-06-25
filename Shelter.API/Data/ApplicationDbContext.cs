@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shelter.API;
+using Shelter.API.Domains;
 using Shelter.API.Entities;
 
 namespace Shelter.Data
@@ -10,10 +11,10 @@ namespace Shelter.Data
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         public DbSet<Advert> Adverts { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<IdentityUser> AppUsers { get; set; }
     }
 }
