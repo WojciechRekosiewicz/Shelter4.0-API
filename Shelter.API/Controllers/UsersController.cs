@@ -29,8 +29,7 @@ namespace Shelter.API.Controllers
         public IActionResult List()
         {
             var users = _userRepository.GetAllUsers();
-            Console.WriteLine();
-            Console.WriteLine(users);
+           
 
             if(!users.Any())
             {
