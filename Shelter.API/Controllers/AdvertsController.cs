@@ -115,6 +115,14 @@ namespace Shelter.Controllers
         [HttpDelete("{id}"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteAsync(int id)
         {
+            var userOwnsAdvert = await _advertRepository.UserOwnsAdvertAsync(id, HttpContext.GetUserId());
+
+            if (!userOwnsAdvert)
+            {
+                var response = new AdvertFailedResponse { Errors = new List<string> { "You do not own this advert." } };
+                return BadRequest(response);
+            }
+
             try
             {
                 await _advertRepository.DeleteAsync(id);
