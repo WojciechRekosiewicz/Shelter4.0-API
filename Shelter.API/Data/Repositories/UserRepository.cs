@@ -26,5 +26,10 @@ namespace Shelter.API.Data.Repositories
         {
             return _appDbContext.AppUsers.FirstOrDefault(p => p.Id == UserId);
         }
+
+        public string GetUserEmailById(string UserId)
+        {
+            return _appDbContext.AppUsers.FirstOrDefault(p => p.Id == UserId).Email;
+        }
     }
 }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shelter.API.Data.Repositories
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         IEnumerable<IdentityUser> GetAllUsers();
         IdentityUser GetUserById(string UserId);
+        string GetUserEmailById(string UserId);
     }
 }
