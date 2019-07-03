@@ -3,19 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Shelter.Data;
 
 namespace Shelter.API.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public IEnumerable<IdentityUser> GetAllUsers()
+        private readonly ApplicationDbContext _appDbContext;
+
+        public UserRepository(ApplicationDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
         }
 
-        public IdentityUser GetUserById(int UserId)
+
+        public IEnumerable<IdentityUser> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _appDbContext.AppUsers.ToArray();
+        }
+
+        public IdentityUser GetUserById(string UserId)
+        {
+            return _appDbContext.AppUsers.FirstOrDefault(p => p.Id == UserId);
         }
     }
 }

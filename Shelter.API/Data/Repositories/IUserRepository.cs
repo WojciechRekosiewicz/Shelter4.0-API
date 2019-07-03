@@ -9,6 +9,6 @@ namespace Shelter.API.Data.Repositories
     interface IUserRepository
     {
         IEnumerable<IdentityUser> GetAllUsers();
-        IdentityUser GetUserById(int UserId);
+        IdentityUser GetUserById(string UserId);
     }
 }
