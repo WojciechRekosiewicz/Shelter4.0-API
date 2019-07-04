@@ -25,25 +25,25 @@ namespace Shelter.API.Controllers
         }
         
 
-        [HttpGet]
-        public IActionResult List()
-        {
-            var users = _userRepository.GetAllUsers();
+        //[HttpGet]
+        //public IActionResult List()
+        //{
+        //    var users = _userRepository.GetAllUsers();
            
 
-            if(!users.Any())
-            {
-                var errors = new List<string> { "There are no users" };
-                return BadRequest(new UserFailedResponse { Errors = errors });
-            }
+        //    if(!users.Any())
+        //    {
+        //        var errors = new List<string> { "There are no users" };
+        //        return BadRequest(new UserFailedResponse { Errors = errors });
+        //    }
 
-            return Ok(new UserSuccessResponse { Result = users, Message = "Request proceed successfully" });
-        }
+        //    return Ok(new UserSuccessResponse { Result = users, Message = "Request proceed successfully" });
+        //}
 
         [HttpGet("{id}")]
         public IActionResult Details(string id)
         {
-            var user = _userRepository.GetUserEmailById(id);
+            var user = _userRepository.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
