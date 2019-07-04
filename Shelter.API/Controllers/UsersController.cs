@@ -43,7 +43,7 @@ namespace Shelter.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Details(string id)
         {
-            var user = _userRepository.GetUserById(id);
+            var user = _userRepository.GetUserEmailById(id);
             if (user == null)
             {
                 return NotFound();
