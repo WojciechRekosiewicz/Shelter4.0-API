@@ -112,6 +112,15 @@ namespace Shelter.Controllers
             }
         }
 
+        [HttpPut("{id}"), Authorize]
+        public async Task<IActionResult> Reserve([FromBody] Advert advert)
+        {
+            await _advertRepository.Reserve(advert);
+            var response = new AdvertSuccessResponse { Message = "Successfully reserved the advert." };
+            return Ok(response);
+        }
+        
+
         [HttpDelete("{id}"), Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteAsync(int id)
         {

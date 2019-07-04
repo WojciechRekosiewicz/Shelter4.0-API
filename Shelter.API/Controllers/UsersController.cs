@@ -23,22 +23,22 @@ namespace Shelter.API.Controllers
             _userRepository = userRepository;
             _userManager = userManager;
         }
-        
 
-        //[HttpGet]
-        //public IActionResult List()
-        //{
-        //    var users = _userRepository.GetAllUsers();
-           
 
-        //    if(!users.Any())
-        //    {
-        //        var errors = new List<string> { "There are no users" };
-        //        return BadRequest(new UserFailedResponse { Errors = errors });
-        //    }
+        [HttpGet]
+        public IActionResult List()
+        {
+            var users = _userRepository.GetAllUsers();
 
-        //    return Ok(new UserSuccessResponse { Result = users, Message = "Request proceed successfully" });
-        //}
+
+            if (!users.Any())
+            {
+                var errors = new List<string> { "There are no users" };
+                return BadRequest(new UserFailedResponse { Errors = errors });
+            }
+
+            return Ok(new UserSuccessResponse { Result = users, Message = "Request proceed successfully" });
+        }
 
         [HttpGet("{id}")]
         public IActionResult Details(string id)
