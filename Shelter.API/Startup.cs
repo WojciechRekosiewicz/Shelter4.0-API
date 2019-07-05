@@ -79,6 +79,7 @@ namespace Shelter.API
 
             // Register dependency injection
             services.AddTransient<IAdvertRepository, AdvertRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddScoped<IIdentityService, IdentityService>();
 

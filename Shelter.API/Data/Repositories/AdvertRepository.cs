@@ -72,6 +72,15 @@ namespace Shelter.API.Data.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
+        public async Task Reserve(Advert advert)
+        {
+            var record = _appDbContext.Adverts.Where(a => a.AdvertId == advert.AdvertId).FirstOrDefault();
+
+            record.ReservingId = advert.ReservingId;
+
+            await _appDbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> UserOwnsAdvertAsync(int advertId, string userId)
         {
             var advert = await _appDbContext.Adverts.AsNoTracking().SingleOrDefaultAsync(x => x.AdvertId == advertId);
@@ -83,5 +92,6 @@ namespace Shelter.API.Data.Repositories
 
             return advert.AuthorId == userId;
         }
+
     }
 }

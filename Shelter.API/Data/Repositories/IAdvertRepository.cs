@@ -14,6 +14,7 @@ namespace Shelter.API.Data.Repositories
         Task CreateAsync(Advert advert);
         Task DeleteAsync(int id);
         Task UpdateAsync(Advert advert);
+        Task Reserve(Advert advert);
         bool CanDelete(string userId, int advertId);
         Task<bool> UserOwnsAdvertAsync(int advertId, string userId);
     }

@@ -16,5 +16,6 @@ namespace Shelter.Data
         public DbSet<Advert> Adverts { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<IdentityUser> AppUsers { get; set; }
+        //public DbSet<IdentityUser<Email>> Users { get; set; }
     }
 }
