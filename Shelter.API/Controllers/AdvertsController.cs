@@ -112,7 +112,7 @@ namespace Shelter.Controllers
             }
         }
 
-        [HttpPut("{id}"), Authorize]
+        [HttpPut("{id}/reserve"), Authorize]
         public async Task<IActionResult> Reserve([FromBody] Advert advert)
         {
             await _advertRepository.Reserve(advert);
